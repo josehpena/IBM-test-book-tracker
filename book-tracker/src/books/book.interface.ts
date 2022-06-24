@@ -1,8 +1,8 @@
 export interface BaseBook {
     titulo: string;
     autor: string;
-    dataDeCadastro: number;
-    dataDeConclusao: number;
+    dataDeCadastro: string;
+    dataDeConclusao: string;
 }
 
 export interface Book extends BaseBook {
