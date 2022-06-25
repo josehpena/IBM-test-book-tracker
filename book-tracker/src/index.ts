@@ -2,7 +2,12 @@ import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import { booksRouter } from "./books/books.router";
+import { booksRouter } from "./apps/books/books.router";
+import { errorHandler } from "./middleware/error.middleware";
+import { notFoundHandler } from "./middleware/not-found.middleware";
+import 'reflect-metadata';
+import connection from './config/db';
+import { server } from './config/index'
 
 dotenv.config();
 
@@ -20,6 +25,12 @@ app.use(cors());
 app.use(express.json());
 app.use("/books", booksRouter)
 
-app.listen(PORT, ()=>{
-    console.log("listening on port " + PORT);
+app.use(errorHandler);
+app.use(notFoundHandler);
+
+connection.then(() => {
+    // precisamos importar o express somente após a conexão com a base, ou então o typeorm vai reclamar que alguns repositories não existem
+    app.listen(server.port, () => {
+        console.log("listening on port " + server.port);
+    });
 });
