@@ -25,9 +25,9 @@ let books: Books = {
     }
   };
 
-  export const findAll =async (): Promise<Book[]> => Object.values(books)
+  export const findAllBooks =async (): Promise<Book[]> => Object.values(books)
 
-  export const find = async (id: number): Promise<Book> => books[id];
+  export const findAbookById = async (id: number): Promise<Book> => books[id];
 
   export const create = async (newBook: BaseBook): Promise<Book> => {
     const id = new Date().valueOf();
@@ -44,7 +44,7 @@ let books: Books = {
     id: number,
     bookUpdate: BaseBook
   ): Promise<Book | null> => {
-    const book = await find(id);
+    const book = await findAbookById(id);
 
     if(!book){
         return null;
@@ -56,7 +56,7 @@ let books: Books = {
   }
 
   export const remove = async (id: number): Promise<null | void> => {
-    const book = await find(id);
+    const book = await findAbookById(id);
 
     if (!book){
         return null;
