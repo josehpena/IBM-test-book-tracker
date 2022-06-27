@@ -1,4 +1,4 @@
-import IResponse from "./../common/interface/response.interface";
+import IResponse from "../common/interface/response.interface";
 import { Request, Response,  } from "express";
 
 const isAuthorized  = function(req: Request, res: Response, next: any) {

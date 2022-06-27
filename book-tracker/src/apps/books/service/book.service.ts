@@ -1,5 +1,5 @@
 import { Book, BaseBook } from '../interface/book.interface'
-import { BookModel } from '../schema/books.entity'
+import { BookModel } from '../schema/books.schema'
 
 class BookService {
   /**
@@ -16,7 +16,7 @@ class BookService {
    * @returns {Promise<Book>}
    */
   async create(data: Book): Promise<Book> {
-    console.log(data)
+   
     const newBook = new BookModel({ ...data })
     const dataValidate = newBook.validateSync()
     if (dataValidate) {
@@ -53,7 +53,7 @@ class BookService {
       throw new Error('Book not found')
     }
     if(bookResult.status != "LIDO"){
-      throw new Error(" Incompatible Status");
+      throw new Error("Incompatible Status");
     }
     
     return await bookResult.update({grade});

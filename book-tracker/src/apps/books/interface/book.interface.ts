@@ -16,5 +16,5 @@ export interface BaseBook {
 
 
 export interface Book extends BaseBook {
-    bookId: string;
+    bookId?: string;
 }

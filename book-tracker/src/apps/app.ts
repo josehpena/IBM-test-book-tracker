@@ -16,6 +16,7 @@ export default class App{
   app: express.Application = express()
   routes: Array<CommonRoutesConfig> = [];
   server: http.Server = http.createServer(this.app)
+  dbUri: string = process.env.DATABASE_MONGO_CONN || "mongodb://localhost:27017/book_traker_db"
   async start(){
     // config of app
     await this.configApp()
@@ -50,7 +51,7 @@ export default class App{
   }
 
   private async startServices(){
-    this.mongooseClient.connect();
+    this.mongooseClient.connect(this.dbUri);
 
   }
 }

@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 
 export default class MongooseClient {
 
-    public connect() {
-        const uri: string = "mongodb://localhost:27017/book_traker_db"
+    public connect(uri: string) {
          mongoose.connect(uri, (err: any) => {
             if (err) {
                 console.log(err.message);
@@ -12,4 +11,7 @@ export default class MongooseClient {
             }
         });
     };
+    public disconnect(){
+        mongoose.connection.close();
+    }
 }

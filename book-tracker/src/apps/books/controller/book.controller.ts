@@ -12,7 +12,6 @@ class BookController {
 
         try{
             const userId = req.headers.user_id?.toString();
-            console.log(userId);
             const books: Book[] = await bookService.geAList(userId);
             const response: IResponse ={
                 success: true,
@@ -116,7 +115,8 @@ class BookController {
             const id: string = req.params.id;
             const data: IStatusUpdate = req.body;
             const userId = req.headers.user_id?.toString();
-            const updateResult =  await bookService.update(id, { status: data.status }, userId);
+            const finishedAt = data.status == "LIDO" ? new Date() : undefined;
+            const updateResult =  await bookService.update(id, { status: data.status, finishedAt  }, userId);
             const response: IResponse ={
                 success: true,
                 data: updateResult

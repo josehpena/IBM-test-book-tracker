@@ -1,5 +1,5 @@
 import {
-  Schema, model, Types
+  Schema, model
 } from 'mongoose';
 import { IUser } from "./../interface/user.interface";
 import { v4 as uuid } from 'uuid';

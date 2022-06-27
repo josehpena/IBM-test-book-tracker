@@ -1,5 +1,5 @@
 import {
-    Schema, model, Types
+    Schema, model
 } from 'mongoose';
 import { Book } from '../interface/book.interface';
 import { EStatus } from '../interface/book.interface';
@@ -9,9 +9,9 @@ export const BookSchema = new Schema<Book>({
 
     bookId: {type: String, default: uuid, unique: true},
 
-    title: String,
+    title: {type: String},
 
-    author: String,
+    author: {type: String},
 
     finishedAt: {type: Date, required: false, default: null},
 

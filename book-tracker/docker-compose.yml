@@ -9,5 +9,21 @@ services:
     image: mongo
     container_name: book_traker_db
     ports:
-      - '27017:27017'
+      - 27017:27017
+  app:
+    container_name: app
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile/Dockerfile.dev
+    env_file: .env
+    environment:
+      - PORT=${PORT}
+      - DATABASE_MONGO_CONN=mongodb://book_traker_db:27017/example
+    ports:
+      - 3000:3000
+    external_links:
+      - mongo
+    depends_on:
+      - mongo
       
